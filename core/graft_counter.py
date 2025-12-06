@@ -34,6 +34,18 @@ PRESETS = {
         th_max_px=35.0,
         tophat_kernel=31,
     ),
+    "high_density": Preset(
+        spec_quantile=99.8,
+        log_sigmas=(1.5, 2.5, 3.5, 5.0),  # سایزهای کوچکتر
+        adapt_block=31,  # بلوک کوچکتر
+        adapt_C=-8,  # حساس‌تر
+        watershed_peak_ratio=0.50,  # جداسازی بیشتر
+        elong_max=5.0,
+        circ_min=0.05,  # مجاز کردن شکل‌های غیرعادی‌تر
+        th_min_px=3.0,  # گرافت‌های کوچکتر
+        th_max_px=40.0,
+        tophat_kernel=25,
+    ),
     "qc": Preset(
         spec_quantile=99.4,
         log_sigmas=(2.0, 3.0, 4.0, 5.0),

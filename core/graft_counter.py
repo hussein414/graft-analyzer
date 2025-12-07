@@ -34,17 +34,29 @@ PRESETS = {
         th_max_px=35.0,
         tophat_kernel=31,
     ),
-    "high_density": Preset(
-        spec_quantile=99.8,
-        log_sigmas=(1.5, 2.5, 3.5, 5.0),  # سایزهای کوچکتر
-        adapt_block=31,  # بلوک کوچکتر
-        adapt_C=-8,  # حساس‌تر
-        watershed_peak_ratio=0.50,  # جداسازی بیشتر
-        elong_max=5.0,
-        circ_min=0.05,  # مجاز کردن شکل‌های غیرعادی‌تر
-        th_min_px=3.0,  # گرافت‌های کوچکتر
-        th_max_px=40.0,
-        tophat_kernel=25,
+    "ultra_dense": Preset(
+        spec_quantile=99.9,
+        log_sigmas=(1.0, 1.5, 2.0, 2.5, 3.0),
+        adapt_block=21,
+        adapt_C=-12,
+        watershed_peak_ratio=0.40,
+        elong_max=8.0,  # ← از 6.0 به 8.0
+        circ_min=0.02,  # ← از 0.03 به 0.02
+        th_min_px=1.5,  # ← از 2.0 به 1.5
+        th_max_px=60.0,  # ← از 50.0 به 60.0
+        tophat_kernel=21,
+    ),
+    "aggressive": Preset(  # ← جدید - برای گرافت‌های خیلی زیاد
+        spec_quantile=99.95,
+        log_sigmas=(0.8, 1.2, 1.8, 2.5, 3.5),  # طیف گسترده
+        adapt_block=19,  # بلوک کوچیک
+        adapt_C=-14,  # خیلی حساس
+        watershed_peak_ratio=0.35,  # جداسازی قوی
+        elong_max=8.0,  # شکل‌های مختلف
+        circ_min=0.01,  # تقریباً همه چیز
+        th_min_px=1.0,  # خیلی کوچک
+        th_max_px=80.0,  # خیلی بزرگ
+        tophat_kernel=19,
     ),
     "qc": Preset(
         spec_quantile=99.4,

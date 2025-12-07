@@ -6,7 +6,7 @@ def _odd(n: int) -> int:
     n = int(max(1, n))
     return n if n % 2 == 1 else n + 1
 
-def detect_petri_mask(bgr: np.ndarray, erode_px: int = 8):
+def detect_petri_mask(bgr: np.ndarray, erode_px: int = 30):
     h, w = bgr.shape[:2]
     gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (0, 0), 3)

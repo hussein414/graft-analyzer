@@ -15,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from core.graft_counter import count_grafts
 
 
-def auto_annotate_image(image_path: str, output_dir: str = "dataset_yolo/train"):
+def auto_annotate_image(image_path: str, output_dir: str = "dataset_yolo/train", preset: str = "clientdemo"):
     """
     یه تصویر رو به صورت خودکار برچسب‌گذاری می‌کنه
     """
@@ -26,9 +26,10 @@ def auto_annotate_image(image_path: str, output_dir: str = "dataset_yolo/train")
         return False
 
     print(f"🔍 در حال تحلیل: {image_path}")
+    print(f"⚙️  Preset: {preset}")
 
     # تشخیص گرافت‌ها با روش CV
-    result = count_grafts(img, preset="clientdemo")
+    result = count_grafts(img, preset=preset)
 
     points = result["points"]  # نقاط مرکزی
     count = len(points)
@@ -85,7 +86,7 @@ def auto_annotate_image(image_path: str, output_dir: str = "dataset_yolo/train")
     return True
 
 
-def auto_annotate_folder(input_folder: str, output_dir: str = "dataset_yolo/train"):
+def auto_annotate_folder(input_folder: str, output_dir: str = "dataset_yolo/train", preset: str = "clientdemo"):
     """
     همه تصاویر یه پوشه رو برچسب‌گذاری می‌کنه
     """
@@ -113,7 +114,7 @@ def auto_annotate_folder(input_folder: str, output_dir: str = "dataset_yolo/trai
     success_count = 0
     for i, img_path in enumerate(images, 1):
         print(f"\n[{i}/{total}] ", end="")
-        if auto_annotate_image(str(img_path), output_dir):
+        if auto_annotate_image(str(img_path), output_dir, preset):
             success_count += 1
 
     print(f"\n{'=' * 60}")
@@ -146,6 +147,9 @@ if __name__ == "__main__":
     parser.add_argument("input", help="مسیر تصویر یا پوشه تصاویر")
     parser.add_argument("-o", "--output", default="dataset_yolo/train",
                         help="پوشه خروجی (پیش‌فرض: dataset_yolo/train)")
+    parser.add_argument("-p", "--preset", default="clientdemo",
+                        choices=["clientdemo", "ultra_dense", "qc"],
+                        help="Preset برای تشخیص (پیش‌فرض: clientdemo)")
 
     args = parser.parse_args()
 
@@ -153,9 +157,9 @@ if __name__ == "__main__":
 
     if input_path.is_file():
         # یه تصویر
-        auto_annotate_image(args.input, args.output)
+        auto_annotate_image(args.input, args.output, args.preset)
     elif input_path.is_dir():
         # یه پوشه
-        auto_annotate_folder(args.input, args.output)
+        auto_annotate_folder(args.input, args.output, args.preset)
     else:
         print(f"❌ فایل یا پوشه پیدا نشد: {args.input}")

@@ -57,7 +57,9 @@ def analyze_bgr(img_bgr: np.ndarray):
 
     # اگر YOLO نبود، از روش CV استفاده کن
     print("🔧 استفاده از روش CV (کلاسیک)")
-    res = count_grafts(img_bgr, preset="clientdemo")
+    # استفاده از پیش‌فرض جدید برای تراکم بالا
+    preset = os.getenv("CV_PRESET", "clientdemo")
+    res = count_grafts(img_bgr, preset=preset)
     overlay_bgr = cv2.cvtColor(res["overlay_clean"], cv2.COLOR_RGB2BGR)
     debug_bgr = cv2.cvtColor(res["overlay_debug"], cv2.COLOR_RGB2BGR)
     centers = res["points"].tolist()

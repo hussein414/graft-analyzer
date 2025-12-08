@@ -1,0 +1,7 @@
+# Synthetic Graft Dataset
+path: D:\OneDrive\Desktop\graft-analyzer\synthetic_dataset
+train: images/train
+val: images/val
+
+nc: 1
+names: ['graft']

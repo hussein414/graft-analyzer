@@ -1,0 +1,25 @@
+{
+  "settings": {
+    "bg_variants": 3,
+    "overlap_chance": 0.35,
+    "blur_chance": 0.3,
+    "val_ratio": 0.1,
+    "image_size": [
+      2000,
+      2000
+    ],
+    "dish_radius_ratio": 0.42,
+    "preview_count": 8,
+    "num_images": 100,
+    "grafts_per_image": [
+      300,
+      800
+    ]
+  },
+  "samples": [
+    {
+      "file": "synthetic_0000.jpg",
+      "count": 325,
+      "boxes": [
+        [
+          
